@@ -1,17 +1,15 @@
-import null as null
 import requests
 from bs4 import BeautifulSoup
-from xlsxwriter import worksheet
 import csv
 
-from sample import birth
+from sample import birth, paragraph
 
 response = requests.get(
     url="https://ta.wikipedia.org/wiki/%E0%AE%A4%E0%AE%AE%E0%AE%BF%E0%AE%B4%E0%AF%8D%E0%AE%A4%E0%AF%8D_%E0%AE%A4%E0%AE%BF%E0%AE%B0%E0%AF%88%E0%AE%AA%E0%AF%8D%E0%AE%AA%E0%AE%9F_%E0%AE%A8%E0%AE%9F%E0%AE%BF%E0%AE%95%E0%AF%88%E0%AE%95%E0%AE%B3%E0%AE%BF%E0%AE%A9%E0%AF%8D_%E0%AE%AA%E0%AE%9F%E0%AF%8D%E0%AE%9F%E0%AE%BF%E0%AE%AF%E0%AE%B2%E0%AF%8D")
 
 soup = BeautifulSoup(response.content, 'html.parser')
 
-csv_columns = ['இலக்கம்','பெயர்','அறிமுக வருடம்','அறிமுக படம்','பிறந்த திகதி','பிறந்த வருடம்','சுருக்கம்']
+csv_columns = ['இலக்கம்','பெயர்','அறிமுக வருடம்','அறிமுக படம்','பிறந்த திகதி','பிறந்த வருடம்','அறிமுகம்','உள்ளடக்கம்']
 
 heroines = soup.findAll('tr')
 heroines = heroines[1:]
@@ -30,16 +28,24 @@ for row in heroines :
     link = data_row[0].a['href']
     link_final = f'https://ta.wikipedia.org/{link}'
 
+    response_new = requests.get(
+        url=link_final)
+
+    soup_new = BeautifulSoup(response_new.content, 'html.parser')
+
     try:
-        bday,birthplace = birth(link_final)
+        bday,birthplace = birth(soup_new)
+        para1,para2 = paragraph(soup_new)
 
     except AttributeError or TypeError:
         bday = '-'
         birthplace = '-'
-        paragraph = '-'
+
 
     dict[csv_columns[4]] = bday
     dict[csv_columns[5]] = birthplace
+    dict[csv_columns[6]] = para1
+    dict[csv_columns[7]] = para2
     # links.append(f'https://ta.wikipedia.org/{link}')
 
     if (data_row[1].text.strip().isnumeric() == True):

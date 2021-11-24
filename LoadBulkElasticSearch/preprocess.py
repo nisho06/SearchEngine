@@ -1,8 +1,10 @@
 def preprocess(df):
     df['அறிமுக வருடம்'].fillna(1950, inplace=True)
-    df['அறிமுக படம்'].fillna('அறியப்படவில்லை', inplace=True)
-    df['பிறந்த இடம்'].fillna('அறியப்படவில்லை', inplace=True)
-    df['உள்ளடக்கம்'].fillna('அறியப்படவில்லை', inplace=True)
+    df['அறிமுக படம்'].fillna('தகவல் இல்லை', inplace=True)
+    df['பிறந்த இடம்'].fillna('தகவல் இல்லை', inplace=True)
+    df['உள்ளடக்கம்'].fillna('தகவல் இல்லை', inplace=True)
+
+    df['அறிமுக வருடம்'] = df['அறிமுக வருடம்'].astype(int)
 
     df2 = df.dropna()
     df2 = df2.drop('இலக்கம்', axis=1)

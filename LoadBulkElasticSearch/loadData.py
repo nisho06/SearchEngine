@@ -45,31 +45,10 @@ ENDPOINT = 'http://localhost:9200/'
 es = Elasticsearch(timeout=600, hosts=ENDPOINT)
 
 dataFrame = preprocess(df)
+dataFrame.to_csv('final.csv')
 
 record = dataFrame.to_dict('records')
-print(record)
-
 mycustom = generator(record)
-
-Settings = {
-    'settings': {
-        'number_of_shards': 1,
-        'number_of_replicas': 0
-    },
-    'mappings': {
-        'properties': {
-            'அறிமுக_வருடம்': {
-                'type': 'integer'
-            },
-            'பிறந்த_திகதி': {
-                'type': 'date'
-            }
-        }
-    }
-}
-
-indexName = 'actors'
-my = es.indices.create(index=indexName, ignore=[400, 404], body=Settings)
 
 # Uploading documents on elastic search
 try:

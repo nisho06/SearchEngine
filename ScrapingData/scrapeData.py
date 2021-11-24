@@ -47,7 +47,6 @@ for row in heroines:
     dict[csv_columns[5]] = birthplace
     dict[csv_columns[6]] = para1
     dict[csv_columns[7]] = para2
-    # links.append(f'https://ta.wikipedia.org/{link}')
 
     if (data_row[1].text.strip().isnumeric() == True):
         dict[csv_columns[2]] = int(data_row[1].text.strip())
@@ -73,18 +72,3 @@ try:
 
 except IOError:
     print("I/O error")
-
-    # if (row.td.find('a',{"class": "new"} == 1)):
-    #     print(row.td.a.text)
-
-    # print(row.td.a.text)
-
-#     if (row.td.a)
-#     names.append(row.td.a.text)
-#
-# print(names)
-
-# print(body.prettify())
-
-# allLinks = soup.find(id="mw-content-text").find_all("a")
-# print(allLinks[1])

@@ -46,6 +46,36 @@ GET actors/_search
 
 5)
 
+
+GET actors/_search
+{
+  "query": {
+    "query_string": {
+      "query": "திரிஷா கிருஷ்ணன்"
+    }
+  }
+}
+
+
+
+6)
+
+
+GET actors/_search
+{
+  "query": {
+    "query_string": {
+      "query": "திரிஷா என்ற கிருஷ்ணன்"
+    }
+  }
+}
+
+
+Check whether the stop words applied or not
+
+
+7)
+
 GET actors/_search
 {
 "size": 20,
@@ -60,7 +90,7 @@ Phrase queries - check the whole query phrase
 
 
 
-6)
+8)
 
 GET actors/_search
 {
@@ -78,7 +108,7 @@ Query match - tokenize and search each tokens
 
 
 
-7)
+9)
 
 GET actors/_search
 {
@@ -110,7 +140,7 @@ Search queries using AND boolean operator
 
 
 
-8)
+10)
 
 GET actors/_search
 {
@@ -142,7 +172,7 @@ Search queries using OR operator
 
 
 
-9)
+11)
 
 GET actors/_search
 {
@@ -159,7 +189,7 @@ fuzzy query - miss spelled words (search all the combinations of correct words)
 
 
 
-10)
+12)
 
 
 
@@ -202,7 +232,7 @@ must not boolean query - NOT operator
 
 
 
-11)
+13)
 
 GET actors/_search
 {
@@ -220,7 +250,7 @@ regex patterns - for english terms
 
 
 
-12)
+14)
 
 GET actors/_search
 {
@@ -236,7 +266,7 @@ GET actors/_search
 regex patterns for tamil terms
 
 
-13)
+15)
 
 
 GET actors/_search
@@ -257,7 +287,7 @@ wild card queries - (start and end letters is enough)
 
 
 
-14)
+16)
 
 GET actors/_search
 {
@@ -278,7 +308,7 @@ GET actors/_search
 Aggregation on the field பிறந்த_இடம்
 
 
-15)
+17)
 
 
 POST /actors/_search?size=0
